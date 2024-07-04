@@ -4,81 +4,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signup Modal Example</title>
+  <title>OTP Input Fields</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    .modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-60%, -50%);
-      background: white;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      z-index: 10;
-    }
-
-    .modal.active {
-      display: block;
-    }
-
-    .backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(1px);
-      z-index: 5;
-      display: none;
-    }
-
-    .backdrop.active {
-      display: block;
+    .otp-box {
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      font-size: 1.25rem;
+      margin-right: 0.5rem;
     }
   </style>
 </head>
 
-<body class="p-4">
-  <button id="loginButton" class="px-4 py-2 bg-blue-500 text-white">Login</button>
-
-  <div id="modal" class="modal">
-    <h2 class="text-xl mb-4">Signup Form</h2>
-    <form>
-      <!-- Your signup form inputs go here -->
-      <div class="mb-4">
-        <label for="email" class="block text-sm">Email</label>
-        <input type="email" id="email" class="w-full border px-2 py-1">
-      </div>
-      <div class="mb-4">
-        <label for="password" class="block text-sm">Password</label>
-        <input type="password" id="password" class="w-full border px-2 py-1">
-      </div>
-      <button type="submit" class="px-4 py-2 bg-green-500 text-white">Signup</button>
-      <button type="button" id="closeButton" class="px-4 py-2 bg-red-500 text-white ml-2">Close</button>
-    </form>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+  <div class="flex space-x-2">
+    <input type="text" maxlength="1" class="otp-box border border-gray-400 rounded-md" />
+    <input type="text" maxlength="1" class="otp-box border border-gray-400 rounded-md" />
+    <input type="text" maxlength="1" class="otp-box border border-gray-400 rounded-md" />
+    <input type="text" maxlength="1" class="otp-box border border-gray-400 rounded-md" />
+    <input type="text" maxlength="1" class="otp-box border border-gray-400 rounded-md" />
+    <input type="text" maxlength="1" class="otp-box border border-gray-400 rounded-md" />
   </div>
 
-  <div id="backdrop" class="backdrop"></div>
-
   <script>
-    // JavaScript to handle modal visibility
-    document.getElementById('loginButton').addEventListener('click', function () {
-      document.getElementById('modal').classList.add('active');
-      document.getElementById('backdrop').classList.add('active');
-    });
+    // JavaScript to handle input focus
+    let a = document.querySelector(".otp-box");
+    console.log(a)
+    a.addEventListener('focus', () => {
+      const inputs = document.querySelectorAll('.otp-box');
 
-    document.getElementById('closeButton').addEventListener('click', function () {
-      document.getElementById('modal').classList.remove('active');
-      document.getElementById('backdrop').classList.remove('active');
-    });
+      inputs.forEach((input, index) => {
+        input.addEventListener('input', () => {
+          if (input.value.length === 1 && index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          }
+        });
 
-    document.getElementById('backdrop').addEventListener('click', function () {
-      document.getElementById('modal').classList.remove('active');
-      document.getElementById('backdrop').classList.remove('active');
+        input.addEventListener('keydown', (event) => {
+          if (event.key === 'Backspace' && input.value.length === 0 && index > 0) {
+            inputs[index - 1].focus();
+          }
+        });
+      });
     });
+    if (navigator.storage && navigator.storage.estimate) {
+        navigator.storage.estimate().then((estimate) => {
+          console.log(`Quota: ${estimate.quota}`);
+          console.log(`Usage: ${estimate.usage}`);
+        });
+      } else {
+        console.log('Storage API not supported');
+      }
+  if ('storage' in navigator && 'estimate' in navigator.storage) {
+    navigator.storage.estimate().then(estimate => {
+      const usage = estimate.usage;
+      const quota = estimate.quota;
+
+      console.log(`Using ${usage} out of ${quota} bytes.`);
+      console.log(`You are using ${Math.round((usage / quota) * 100)}% of your storage.`);
+    });
+  } else {
+    console.log('Storage Manager API not supported.');
+  }
+
   </script>
 </body>
 
