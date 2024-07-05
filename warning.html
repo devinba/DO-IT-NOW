@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resize Warning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <div class="w-3/4 text-4xl mx-auto translate-y-44 text-center">
+    <h1>Thie application will be working only with the device width which is more than 750px</h1>
+  </div>
+  <script>
+    function checkWindowWidth() {
+      // console.log(window.innerWidth);
+      if (window.innerWidth > 750) {
+        const previousPage = sessionStorage.getItem("previousPage");
+        if (previousPage) {
+          window.location.href = previousPage;
+          // location.reload(true);
+        } else {
+          window.location.href = "index.html";
+          // location.reload(true);
+        }
+      };
+    };
+
+    window.addEventListener("resize",checkWindowWidth);
+    window.addEventListener("load", checkWindowWidth);
+  </script>
+</body>
+
+</html>

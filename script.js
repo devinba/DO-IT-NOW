@@ -1,3 +1,12 @@
+function checkWindowSize() {
+  if (window.innerWidth <= 750) {
+    // console.log("Window size is less than 750px")
+    window.location.href = "warning.html";
+  }
+}
+window.addEventListener("resize", checkWindowSize);
+window.addEventListener("load", checkWindowSize);
+
 // this part of code is written to pop the model and the backdrop in the screen
 const logInBtn = document.getElementById("popUpSignup");
 logInBtn.addEventListener("click", () => {
@@ -70,7 +79,7 @@ otpInput[0].addEventListener("focus", () => {
         // console.log(index);
         // console.log(otpInput.length);
       };
-    // check poitner to go the next page
+      // check poitner to go the next page
       if (index + 1 === otpInput.length && input.value.length === 1) {
         input.classList.add("border-2")
         input.classList.add("border-indigo-400");
@@ -79,7 +88,7 @@ otpInput[0].addEventListener("focus", () => {
         console.log("Navigating to the next page");
       }
 
-    // to override the value to enter the new value by using backspace key
+      // to override the value to enter the new value by using backspace key
     });
     input.addEventListener("keydown", (event) => {
       if (index > 0 && event.key === "Backspace" && input.value.length === 0) {
@@ -89,3 +98,4 @@ otpInput[0].addEventListener("focus", () => {
   });
 });
 // console.log(window.location.href)
+
