@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Basic Bar Chart with D3.js</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    .bar {
+      fill: steelblue;
+    }
+
+    .bar:hover {
+      fill: orange;
+    }
+
+    .axis-label {
+      font-size: 12px;
+      text-anchor: middle;
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="500" height="300"></svg>
+  <script>
+    // Sample data
+    const data = [30, 86, 168, 281, 303, 365];
+
+    // Set dimensions and margins
+    const width = 500;
+    const height = 300;
+    const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+
+    // Create an SVG container
+    const svg = d3.select("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+    // Set the scale
+    const x = d3.scaleBand()
+      .domain(data.map((d, i) => i))
+      .range([margin.left, width - margin.right])
+      .padding(0.1);
+
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data)])
+      .nice()
+      .range([height - margin.bottom, margin.top]);
+
+    // Add bars to the chart
+    svg.selectAll(".bar")
+      .data(data)
+      .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", (d, i) => x(i))
+      .attr("y", d => y(d))
+      .attr("width", x.bandwidth())
+      .attr("height", d => y(0) - y(d));
+
+    // Add x-axis
+    svg.append("g")
+      .attr("class", "x-axis")
+      .attr("transform", `translate(0,${height - margin.bottom})`)
+      .call(d3.axisBottom(x).tickFormat(i => i));
+
+    // Add y-axis
+    svg.append("g")
+      .attr("class", "y-axis")
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y));
+
+    // Add axis labels
+    svg.append("text")
+      .attr("class", "axis-label")
+      .attr("x", width / 2)
+      .attr("y", height - margin.bottom / 2)
+      .text("Index");
+
+    svg.append("text")
+      .attr("class", "axis-label")
+      .attr("x", -height / 2)
+      .attr("y", margin.left / 2)
+      .attr("dy", "-1em")
+      .attr("transform", "rotate(-90)")
+      .text("Value");
+
+  </script>
+</body>
+
+</html>
