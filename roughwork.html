@@ -3,88 +3,133 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Basic Bar Chart with D3.js</title>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <style>
-    .bar {
-      fill: steelblue;
-    }
-
-    .bar:hover {
-      fill: orange;
-    }
-
-    .axis-label {
-      font-size: 12px;
-      text-anchor: middle;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndexedDB Example</title>
 </head>
 
 <body>
-  <svg width="500" height="300"></svg>
+  <h1>IndexedDB Example</h1>
+  <form id="taskForm">
+    <input type="text" id="taskTitle" placeholder="Task Title" required>
+    <input type="text" id="taskDescription" placeholder="Task Description" required>
+    <button type="submit">Add Task</button>
+  </form>
+  <button id="clearAllTasks">Clear All Tasks</button>
+  <ul id="taskList"></ul>
+
   <script>
-    // Sample data
-    const data = [30, 86, 168, 281, 303, 365];
+    // IndexedDB setup code here
 
-    // Set dimensions and margins
-    const width = 500;
-    const height = 300;
-    const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+    const dbName = "myDatabase";
+    let db;
 
-    // Create an SVG container
-    const svg = d3.select("svg")
-      .attr("width", width)
-      .attr("height", height);
+    const request = indexedDB.open(dbName, 1);
 
-    // Set the scale
-    const x = d3.scaleBand()
-      .domain(data.map((d, i) => i))
-      .range([margin.left, width - margin.right])
-      .padding(0.1);
+    request.onupgradeneeded = (event) => {
+      db = event.target.result;
+      if (!db.objectStoreNames.contains('tasks')) {
+        const objectStore = db.createObjectStore('tasks', { keyPath: 'id', autoIncrement: true });
+        objectStore.createIndex('title', 'title', { unique: false });
+      }
+    };
 
-    const y = d3.scaleLinear()
-      .domain([0, d3.max(data)])
-      .nice()
-      .range([height - margin.bottom, margin.top]);
+    request.onsuccess = (event) => {
+      db = event.target.result;
+      console.log("Database opened successfully");
+      displayTasks();
+    };
 
-    // Add bars to the chart
-    svg.selectAll(".bar")
-      .data(data)
-      .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", (d, i) => x(i))
-      .attr("y", d => y(d))
-      .attr("width", x.bandwidth())
-      .attr("height", d => y(0) - y(d));
+    request.onerror = (event) => {
+      console.error("Database error:", event.target.errorCode);
+    };
+    // db opend --------------------------------------------------------------->
 
-    // Add x-axis
-    svg.append("g")
-      .attr("class", "x-axis")
-      .attr("transform", `translate(0,${height - margin.bottom})`)
-      .call(d3.axisBottom(x).tickFormat(i => i));
+    // Function to add task
+    function addTask(title, description) {
+      const transaction = db.transaction(['tasks'], 'readwrite');
+      const objectStore = transaction.objectStore('tasks');
+      const task = { title, description, created: new Date() };
+      const request = objectStore.add(task);
 
-    // Add y-axis
-    svg.append("g")
-      .attr("class", "y-axis")
-      .attr("transform", `translate(${margin.left},0)`)
-      .call(d3.axisLeft(y));
+      request.onsuccess = () => {
+        console.log("Task added successfully");
+        displayTasks();
+      };
 
-    // Add axis labels
-    svg.append("text")
-      .attr("class", "axis-label")
-      .attr("x", width / 2)
-      .attr("y", height - margin.bottom / 2)
-      .text("Index");
+      request.onerror = (event) => {
+        console.error("Error adding task:", event.target.errorCode);
+      };
+    }
 
-    svg.append("text")
-      .attr("class", "axis-label")
-      .attr("x", -height / 2)
-      .attr("y", margin.left / 2)
-      .attr("dy", "-1em")
-      .attr("transform", "rotate(-90)")
-      .text("Value");
+    // Function to display tasks
+    function displayTasks() {
+      const transaction = db.transaction(['tasks']);
+      const objectStore = transaction.objectStore('tasks');
+      const request = objectStore.getAll();
 
+      request.onsuccess = (event) => {
+        const tasks = event.target.result;
+        const taskList = document.getElementById('taskList');
+        taskList.innerHTML = '';
+        tasks.forEach(task => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${task.title}: ${task.description} , ${task.id}`;
+          // Add a delete button for each task
+          const deleteButton = document.createElement('button');
+          deleteButton.textContent = 'Delete';
+          deleteButton.addEventListener('click', () => deleteTask(task.id));
+          listItem.appendChild(deleteButton);
+          taskList.appendChild(listItem);
+        });
+      };
+
+      request.onerror = (event) => {
+        console.error("Error fetching tasks:", event.target.errorCode);
+      };
+    }
+
+    // Function to delete task
+    function deleteTask(id) {
+      const transaction = db.transaction(['tasks'], 'readwrite');
+      const objectStore = transaction.objectStore('tasks');
+      const request = objectStore.delete(id);
+
+      request.onsuccess = () => {
+        console.log("Task deleted successfully");
+        displayTasks();
+      };
+
+      request.onerror = (event) => {
+        console.error("Error deleting task:", event.target.errorCode);
+      };
+    }
+
+    // Function to clear all tasks
+    function clearAllTasks() {
+      const transaction = db.transaction(['tasks'], 'readwrite');
+      const objectStore = transaction.objectStore('tasks');
+      const request = objectStore.clear();
+
+      request.onsuccess = () => {
+        console.log("All tasks cleared successfully");
+        displayTasks();
+      };
+
+      request.onerror = (event) => {
+        console.error("Error clearing tasks:", event.target.errorCode);
+      };
+    }
+
+    // Event listener for form submission
+    document.getElementById('taskForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const title = document.getElementById('taskTitle').value;
+      const description = document.getElementById('taskDescription').value;
+      addTask(title, description);
+    });
+
+    // Event listener for clearing all tasks
+    document.getElementById('clearAllTasks').addEventListener('click', clearAllTasks);
   </script>
 </body>
 
