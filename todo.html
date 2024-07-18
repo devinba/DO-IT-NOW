@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To do </title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body>
   <div class="global-container box-border h-auto relative">
     <header class="p-6">
-      <nav class="p-2 w-full h-auto shadow-md shadow-gray-100 pl-8  flex items-center md:justify-between justify-between">
+      <nav
+        class="p-2 w-full h-auto shadow-md shadow-gray-100 pl-8  flex items-center md:justify-between justify-between">
         <div class="logo w-auto"><img src="./images/DO IT NOW.png" alt=""></div>
         <div><img src="./images/menu.png" alt="" id="menu-todo"></div>
       </nav>
     </header>
     <div class="grid grid-cols-3 w-full gap-x-6 gap-y-6  p-6 min-h-3/4">
-      <div class=" row-span-1 flex items-center justify-center"> 
+      <div class=" row-span-1 flex items-center justify-center">
         <div class="border border-blue-400 px-8 py-2 rounded text-xl">To Do</div>
       </div>
       <div class="row-span-1 flex items-center justify-center">
@@ -25,20 +28,28 @@
         <div class="border border-blue-400 px-8 py-2 rounded text-xl">Done</div>
       </div>
       <div class="bg-gray-100 rounded-xl p-4 flex flex-col gap-y-6 task-container" id="toDoBox">
-        <div class="bg-white h-32 flex justify-center items-center text-xl hover:bg-gray-200" id="addTask">
-          <img src="./images/add_circle.png" alt="" class="scale-150 opacity-60">
-          <div class="ml-4 text-xl">Add</div>
+        <div class="bg-white h-32 flex justify-center items-center text-xl hover:bg-gray-200 relative" id="addTask">
+          <div class="flex" id="addTaskIcon">
+            <img src="./images/add_circle.png" alt="" class="scale-150 opacity-60 hover-rm">
+            <div class="ml-4 text-xl hover-rm">Add</div>
+          </div>
+          <div class="hover-task-icon flex flex-col gap-y-4 absolute right-4 hidden" id="taskHoverIcon">
+            <div class="timer border border-black w-8 h-8 rounded-full flex items-center justify-center" title="Timer">00</div>
+            <div title="Delete"><img src="./images/Group 2.png" alt=""></div>
+          </div>
         </div>
-        
+
       </div>
       <div class="bg-gray-100 rounded-xl p-4 gap-y-6 flex flex-col task-container">
       </div>
       <div class="rounded-xl bg-gray-100 task-container p-4 gap-y-6 flex flex-col ">
-        
+
       </div>
     </div>
   </div>
-  <div class="todoMenu bg-gray-100 inline-block p-4 rounded rounded-lg shadow-md shadow-gray-200 fixed right-10 top-10 hidden" id="todoMenu">
+  <div
+    class="todoMenu bg-gray-100 inline-block p-4 rounded rounded-lg shadow-md shadow-gray-200 fixed right-10 top-10 hidden"
+    id="todoMenu">
     <ul class="flex flex-col gap-y-6">
       <li class="border-b-2 pb-2 hover:text-gray-600"><a href="./yourProgress.html">Your progress</a></li>
       <li class="border-b-2 pb-2 hover:text-gray-600">Theme</li>
@@ -46,38 +57,54 @@
       <li class="border-b-2 pb-2 hover:text-gray-600">Log Out</li>
     </ul>
   </div>
-  <div class="w-11/12 bg-gray-100 fixed top-2/4 left-2/4 -translate-x-2/4 -translate-y-96 z-10 p-4 max-h-full overflow-y-auto hidden" id="taskDesModel">
-    <div class="top-bar w-full shadow py-2 px-4">
-      <div class="flex justify-between items-center">
-        <div class="text-4xl text-gray-500 w-1/3 focus:outline-none" id="task-title-input" contenteditable="true">Title</div>
-        <div class="flex gap-x-8 pr-6 justify-center items-center text-gray-500">
-          <div class="flex gap-x-4 text-xl items-stretch">
-            <div class="date text-6xl text-gray-700" id="taskDate">20</div>
+
+  <template id="descriptionModelTemplate">
+    <div
+      class="w-11/12 bg-gray-100 fixed top-2/4 left-2/4 -translate-x-2/4 -translate-y-96 z-10 p-4 max-h-full overflow-y-auto hidden"
+      id="taskDesModel">
+      <div class="top-bar w-full shadow py-2 px-4">
+        <div class="flex justify-between items-center">
+          <div class="text-4xl text-gray-500 w-1/3 focus:outline-none" id="task-title-input" contenteditable="true">Title</div>
+          <div class="flex gap-x-8 pr-6 justify-center items-center text-gray-500">
+            <div class="flex gap-x-4 text-xl items-stretch">
+              <div class="date text-6xl text-gray-700" id="taskDate">20</div>
+              <div>
+                <div class="day" id="taskDay">Friday</div>
+                <div class="monthYear" id="taskMonth">May 2024</div>
+              </div>
+            </div>
+            <div class="timer">
+              <img src="./images/timer.png" alt="" id="taskTimerImage">
+            </div>
             <div>
-              <div class="day" id="taskDay">Friday</div>
-              <div class="monthYear" id="taskMonth">May 2024</div>
+              <img src="./images/delete.png" alt="" id="taskDeleteImage">
             </div>
           </div>
-          <div class="timer">
-            <img src="./images/timer.png" alt="" id="taskTimerImage">
-          </div> 
         </div>
       </div>
-    </div>
-    <div class="description px-4 py-12 w-full h-auto mt-2 focus:outline-none leading-normal tracking-wide text-xl text-gray-800 overflow-auto" id="task-description-input" contenteditable="true">Starting typing....</div>
-
-    <div class="h-36 inline-block bg-gray-200 inline-flex flex-col gap-y-4 p-4 justify-center fixed top-14 right-20 rounded shadow shadow-gray-300 opacity-95 hidden" id="setTaskTimer">
+      <div
+        class="description px-4 py-12 w-full h-auto mt-2 focus:outline-none leading-normal tracking-wide text-xl text-gray-800 overflow-auto"
+        id="task-description-input" contenteditable="true">Starting typing...</div>
+      <div
+        class="h-36 inline-block bg-gray-200 inline-flex flex-col gap-y-4 p-4 justify-center fixed top-14 right-36 rounded shadow shadow-gray-300 opacity-95 hidden"
+        id="setTaskTimer">
         <div id="fromTime" class="flex gap-x-6">
-          <div class="fromHour bg-gray-100 p-2 rounded focus:  focus:outline-blue-500 text-xl" contenteditable="true">12</div>
-          <div class="fromMinute bg-gray-100 p-2 rounded focus:outline-blue-500 text-xl" contenteditable="true">30</div>
+          <div class="fromHour bg-gray-100 p-2 rounded focus:  focus:outline-blue-500 text-xl" id="fromHour">00
+          </div>
+          <div class="fromMinute bg-gray-100 p-2 rounded focus:outline-blue-500 text-xl" id="fromMin">00</div>
         </div>
         <div id="toTime" class="flex gap-x-6 inline-block">
-          <div class="toHour bg-gray-100 p-2 rounded focus:outline-blue-500 text-xl" contenteditable="true">12</div>
-          <div class="toMinute bg-gray-100 p-2 rounded focus:outline-blue-500 text-xl" contenteditable="true">30</div>
+          <div class="toHour bg-gray-100 p-2 rounded focus:outline-blue-500 text-xl" contenteditable="true" id="toHour">00</div>
+          <div class="toMinute bg-gray-100 p-2 rounded focus:outline-blue-500 text-xl" contenteditable="true" id="toMin">00</div>
         </div>
+      </div>
+      <div class="w-56 bg-red-100 p-2 rounded border-2 border-red-700 absolute bottom-0 right-72 hidden" id="timerInfo">Set the task timer,And completion timer should be greater than the from time</div>
     </div>
+  </template>
+  <div id="descriptionModelHolder">
   </div>
   <div class="backdrop bg-black fixed top-0 bottom-0 h-full w-full opacity-30 z-5 hidden" id="taskBackdrop"></div>
   <script src="script2.js"></script>
 </body>
+
 </html>

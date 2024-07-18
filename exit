@@ -1,0 +1,41 @@
+[33mcommit 051d51d0608a752ca4004c36b24018dff4222b3e[m[33m ([m[1;36mHEAD -> [m[1;32myouProgess[m[33m, [m[1;31morigin/youProgess[m[33m, [m[1;32myourPrograss[m[33m)[m
+Author: Inbarasu <inbarasu.saravanan@signzy.com>
+Date:   Wed Jul 10 00:58:39 2024 +0530
+
+    😆 enchanment of to do list page and also added the progess page owth d3. js js and started with storing the data in the index db
+
+[33mcommit 5eeb290c77f5e26e975d72ec89da9ba9fb8ce731[m[33m ([m[1;31morigin/yourPrograss[m[33m, [m[1;32mtodopage[m[33m)[m
+Author: Inbarasu <inbarasu.saravanan@signzy.com>
+Date:   Sat Jul 6 23:08:58 2024 +0530
+
+    😌 I have create the your progress page and also I have some modified drag and drop features in the to do task page
+
+[33mcommit 0072a230afd18e42aa63ef42660a36a0354ac3d9[m[33m ([m[1;31morigin/todopage[m[33m)[m
+Author: Inbarasu <inbarasu.saravanan@signzy.com>
+Date:   Fri Jul 5 15:57:58 2024 +0530
+
+    🥳 The to do page has been created and added the task description as well
+
+[33mcommit f7d0fe8180d5bd0f496307b951f1b5a699cddb60[m[33m ([m[1;31morigin/otp-vetigication[m[33m, [m[1;32motp-vetigication[m[33m, [m[1;32mlanding-page-functionality[m[33m)[m
+Author: Inbarasu <inbarasu.saravanan@signzy.com>
+Date:   Thu Jul 4 16:06:53 2024 +0530
+
+    📱 The otp verify page has been created
+
+[33mcommit 3226fe887a07537f7f6a3040f5887a581062eee1[m[33m ([m[1;31morigin/landing-page-functionality[m[33m)[m
+Author: Inbarasu <inbarasu.saravanan@signzy.com>
+Date:   Thu Jul 4 00:43:47 2024 +0530
+
+    🫨 Javascript has been added to the landing page for signup model and backdrop
+
+[33mcommit b948b84bf0fbeb16ec9d7d4e92e1e8b87bd91ef4[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Inbarasu <inbarasu.saravanan@signzy.com>
+Date:   Thu Jul 4 00:12:23 2024 +0530
+
+    🤩 The backdrop and the sign up  model lhas been added in the landing page
+
+[33mcommit 760220673f083875014ac86cfa9e17678b1fa781[m
+Author: Inbarasu <inbarasu.saravanan@signzy.com>
+Date:   Wed Jul 3 19:04:39 2024 +0530
+
+    😎 The project has been started and I have created the responsive landing page for the project

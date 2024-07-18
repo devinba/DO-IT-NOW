@@ -4,132 +4,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IndexedDB Example</title>
+  <title>Countdown Timer</title>
+  <style>
+    .timer-container {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 10px solid #ccc;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+    }
+
+    .timer-circle {
+      width: 100%;
+      height: 100%;
+      clip: rect(0px, 200px, 200px, 100px);
+      position: absolute;
+    }
+
+    .timer-circle-fill {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 10px solid red;
+      clip: rect(0px, 100px, 200px, 0px);
+      position: absolute;
+      transform: rotate(0deg);
+    }
+
+    .timer-circle-mask {
+      width: 100%;
+      height: 100%;
+      clip: rect(0px, 100px, 200px, 0px);
+      position: absolute;
+    }
+
+    .timer-circle-mask .timer-circle-fill {
+      border-color: #ccc;
+    }
+
+    .timer-time {
+      position: absolute;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>IndexedDB Example</h1>
-  <form id="taskForm">
-    <input type="text" id="taskTitle" placeholder="Task Title" required>
-    <input type="text" id="taskDescription" placeholder="Task Description" required>
-    <button type="submit">Add Task</button>
-  </form>
-  <button id="clearAllTasks">Clear All Tasks</button>
-  <ul id="taskList"></ul>
+  <div class="timer-container">
+    <div class="timer-circle">
+      <div class="timer-circle-fill" id="left-half"></div>
+    </div>
+    <div class="timer-circle-mask">
+      <div class="timer-circle-fill" id="right-half"></div>
+    </div>
+    <div class="timer-time" id="time">60:00</div>
+  </div>
 
   <script>
-    // IndexedDB setup code here
+    function startCountdown(fromTime, toTime) {
+      const fromHour = new Date(`1970-01-01T${fromTime}:00`);
+      const toHour = new Date(`1970-01-01T${toTime}:00`);
+      let timeDifference = (toHour - fromHour) / 1000; // Difference in seconds
 
-    const dbName = "myDatabase";
-    let db;
+      const totalDuration = timeDifference;
+      const leftHalf = document.getElementById('left-half');
+      const rightHalf = document.getElementById('right-half');
+      const timeDisplay = document.getElementById('time');
 
-    const request = indexedDB.open(dbName, 1);
+      function updateTimer() {
+        if (timeDifference >= 0) {
+          const minutes = Math.floor(timeDifference / 60);
+          const seconds = timeDifference % 60;
+          timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}`;
 
-    request.onupgradeneeded = (event) => {
-      db = event.target.result;
-      if (!db.objectStoreNames.contains('tasks')) {
-        const objectStore = db.createObjectStore('tasks', { keyPath: 'id', autoIncrement: true });
-        objectStore.createIndex('title', 'title', { unique: false });
+          const rotation = (360 * (totalDuration - timeDifference)) / totalDuration;
+          if (rotation <= 180) {
+            rightHalf.style.transform = `rotate(${rotation}deg)`;
+          } else {
+            rightHalf.style.transform = `rotate(180deg)`;
+            leftHalf.style.transform = `rotate(${rotation - 180}deg)`;
+          }
+
+          timeDifference--;
+          setTimeout(updateTimer, 1000);
+        } else {
+          timeDisplay.textContent = "0:00";
+          leftHalf.style.transform = `rotate(180deg)`;
+          rightHalf.style.transform = `rotate(180deg)`;
+        }
       }
-    };
 
-    request.onsuccess = (event) => {
-      db = event.target.result;
-      console.log("Database opened successfully");
-      displayTasks();
-    };
-
-    request.onerror = (event) => {
-      console.error("Database error:", event.target.errorCode);
-    };
-    // db opend --------------------------------------------------------------->
-
-    // Function to add task
-    function addTask(title, description) {
-      const transaction = db.transaction(['tasks'], 'readwrite');
-      const objectStore = transaction.objectStore('tasks');
-      const task = { title, description, created: new Date() };
-      const request = objectStore.add(task);
-
-      request.onsuccess = () => {
-        console.log("Task added successfully");
-        displayTasks();
-      };
-
-      request.onerror = (event) => {
-        console.error("Error adding task:", event.target.errorCode);
-      };
+      updateTimer();
     }
 
-    // Function to display tasks
-    function displayTasks() {
-      const transaction = db.transaction(['tasks']);
-      const objectStore = transaction.objectStore('tasks');
-      const request = objectStore.getAll();
-
-      request.onsuccess = (event) => {
-        const tasks = event.target.result;
-        const taskList = document.getElementById('taskList');
-        taskList.innerHTML = '';
-        tasks.forEach(task => {
-          const listItem = document.createElement('li');
-          listItem.textContent = `${task.title}: ${task.description} , ${task.id}`;
-          // Add a delete button for each task
-          const deleteButton = document.createElement('button');
-          deleteButton.textContent = 'Delete';
-          deleteButton.addEventListener('click', () => deleteTask(task.id));
-          listItem.appendChild(deleteButton);
-          taskList.appendChild(listItem);
-        });
-      };
-
-      request.onerror = (event) => {
-        console.error("Error fetching tasks:", event.target.errorCode);
-      };
-    }
-
-    // Function to delete task
-    function deleteTask(id) {
-      const transaction = db.transaction(['tasks'], 'readwrite');
-      const objectStore = transaction.objectStore('tasks');
-      const request = objectStore.delete(id);
-
-      request.onsuccess = () => {
-        console.log("Task deleted successfully");
-        displayTasks();
-      };
-
-      request.onerror = (event) => {
-        console.error("Error deleting task:", event.target.errorCode);
-      };
-    }
-
-    // Function to clear all tasks
-    function clearAllTasks() {
-      const transaction = db.transaction(['tasks'], 'readwrite');
-      const objectStore = transaction.objectStore('tasks');
-      const request = objectStore.clear();
-
-      request.onsuccess = () => {
-        console.log("All tasks cleared successfully");
-        displayTasks();
-      };
-
-      request.onerror = (event) => {
-        console.error("Error clearing tasks:", event.target.errorCode);
-      };
-    }
-
-    // Event listener for form submission
-    document.getElementById('taskForm').addEventListener('submit', (event) => {
-      event.preventDefault();
-      const title = document.getElementById('taskTitle').value;
-      const description = document.getElementById('taskDescription').value;
-      addTask(title, description);
-    });
-
-    // Event listener for clearing all tasks
-    document.getElementById('clearAllTasks').addEventListener('click', clearAllTasks);
+    startCountdown('17:00', '20:00');
   </script>
 </body>
 
