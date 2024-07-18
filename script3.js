@@ -56,5 +56,3 @@ pieChart.select("g").selectAll("path")
   .join("path")
   .attr("fill", (d, i) => colors[i % colors.length])
   .attr("d", progressPieArc);
-
-
