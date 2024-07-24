@@ -34,15 +34,16 @@
             <div class="ml-4 text-xl hover-rm">Add</div>
           </div>
           <div class="hover-task-icon flex flex-col gap-y-4 absolute right-4 hidden" id="taskHoverIcon">
-            <div class="timer border border-black w-8 h-8 rounded-full flex items-center justify-center" title="Timer">00</div>
+            <div class="timer border border-black w-8 h-8 rounded-full flex items-center justify-center" title="Timer">
+              00</div>
             <div title="Delete"><img src="./images/Group 2.png" alt=""></div>
           </div>
         </div>
 
       </div>
-      <div class="bg-gray-100 rounded-xl p-4 gap-y-6 flex flex-col task-container">
+      <div class="bg-gray-100 rounded-xl p-4 gap-y-6 flex flex-col task-container" id="doing-task">
       </div>
-      <div class="rounded-xl bg-gray-100 task-container p-4 gap-y-6 flex flex-col ">
+      <div class="rounded-xl bg-gray-100 task-container p-4 gap-y-6 flex flex-col" id="done-task">
 
       </div>
     </div>
@@ -64,7 +65,8 @@
       id="taskDesModel">
       <div class="top-bar w-full shadow py-2 px-4">
         <div class="flex justify-between items-center">
-          <div class="text-4xl text-gray-500 w-1/3 focus:outline-none" id="task-title-input" contenteditable="true">Title</div>
+          <div class="text-4xl text-gray-500 w-1/3 focus:outline-none" id="task-title-input" contenteditable="true">
+            Title</div>
           <div class="flex gap-x-8 pr-6 justify-center items-center text-gray-500">
             <div class="flex gap-x-4 text-xl items-stretch">
               <div class="date text-6xl text-gray-700" id="taskDate">20</div>
@@ -94,11 +96,14 @@
           <div class="fromMinute bg-gray-100 p-2 rounded focus:outline-blue-500 text-xl" id="fromMin">00</div>
         </div>
         <div id="toTime" class="flex gap-x-6 inline-block">
-          <div class="toHour bg-gray-100 p-2 rounded focus:outline-blue-500 text-xl" contenteditable="true" id="toHour">00</div>
-          <div class="toMinute bg-gray-100 p-2 rounded focus:outline-blue-500 text-xl" contenteditable="true" id="toMin">00</div>
+          <div class="toHour bg-gray-100 p-2 rounded focus:outline-blue-500 text-xl" contenteditable="true" id="toHour">
+            00</div>
+          <div class="toMinute bg-gray-100 p-2 rounded focus:outline-blue-500 text-xl" contenteditable="true"
+            id="toMin">00</div>
         </div>
       </div>
-      <div class="w-56 bg-red-100 p-2 rounded border-2 border-red-700 absolute bottom-0 right-72 hidden" id="timerInfo">Set the task timer,And completion timer should be greater than the from time</div>
+      <div class="w-56 bg-red-100 p-2 rounded border-2 border-red-700 absolute bottom-0 right-72 hidden" id="timerInfo">
+        Set the task timer,And completion timer should be greater than the from time</div>
     </div>
   </template>
   <div id="descriptionModelHolder">
