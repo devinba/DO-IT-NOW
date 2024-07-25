@@ -7,12 +7,47 @@ function checkWindowSize() {
 window.addEventListener("resize", checkWindowSize);
 window.addEventListener("load", checkWindowSize);
 
+document.addEventListener("DOMContentLoaded", () => {
+  // login data db
+  const usersids = {
+    u1: {
+      emailId: "inbarasu079@gmail.com",
+      mobileNo: 9880921400,
+      password: "inba@123"
+    }
+  }
+  localStorage.setItem("userCred", JSON.stringify(usersids));
+});
 // this part of code is written to pop the model and the backdrop in the screen
 const logInBtn = document.getElementById("popUpSignup");
 logInBtn.addEventListener("click", () => {
   document.getElementById("loginModel").classList.remove("hidden");
   document.getElementById("signupBackdrop").classList.remove("hidden");
 });
+
+
+
+// Log In Crediential
+const emailOrMobile = document.getElementById("loginEmailMobileNo");
+const password = document.getElementById("signupPassword");
+emailOrMobile.addEventListener("blur", (e) => {
+  const getUserdIds = JSON.parse(localStorage.getItem("userCred"));
+  console.log("local storage email id: ", getUserdIds.u1.emailId);
+  if (e.target.value == getUserdIds.u1.emailId || e.target.value == getUserdIds.u1.mobileNo) {
+    emailOrMobile.classList.remove("border-red-500");
+    password.addEventListener("blur", (e) => {
+      if (e.target.value == getUserdIds.u1.password) {
+        window.location.href = "todo.html";
+      } else {
+        password.classList.add("border-red-500");
+      }
+    })
+  } else {
+    emailOrMobile.classList.add("border-red-500");
+    // console.log("No", e.target.value === getUserdIds.u1.emailId);
+  }
+})
+
 // This lines are written to remove the the models and backdrop from the main page
 const loginBackdrop = document.getElementById("signupBackdrop");
 loginBackdrop.addEventListener("click", () => {

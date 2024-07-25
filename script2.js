@@ -13,12 +13,19 @@ const taskBackdrop = document.getElementById("taskBackdrop");
 let desIdStore = [];
 let taskStore = {};
 
+// // exporting the data 
+// const sharedData = {
+//   key: "value",
+//   anotherKey: "anotherValue"
+// };
+
+
 // task Storage
 function addTask(date, taskId, taskDetails) {
   if (!taskStore[date]) {
     taskStore[date] = {};
   }
-  taskStore[date][taskId] = taskDetails;
+  taskStore[date][[taskId]] = taskDetails;
 }
 // Unique ID generator
 function generateUniqueId() {
@@ -338,9 +345,9 @@ function createTask() {
           const date = `${month}-${day}-${year}`;
           const setTime = totalRemainingHours;
           const taskStatus = "Done";
-          const taskIds = taskID();
+          const taskIds = desUniqueId;
           const newTask = {
-            taskNo: taskIds(),
+            taskNo: desUniqueId,
             date: date,
             day: dayOfWeek,
             time: time,
@@ -349,8 +356,13 @@ function createTask() {
             setTime: setTime + "mins",
             taskStatus: taskStatus,
           }
-          addTask(date, newTask.taskNo, newTask);
+          addTask(date, desUniqueId, newTask);
+
+          // storing data in the local storage 
+          localStorage.setItem("sharedData", JSON.stringify(taskStore));
+          console.log("the data has been saved in the local storage");
           console.log("THe new task object is:", taskStore);
+          console.log("the id storage: ", desIdStore);
         }
       }
     });

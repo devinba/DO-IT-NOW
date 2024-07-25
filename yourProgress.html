@@ -15,7 +15,9 @@
     <header class="p-6">
       <nav
         class="p-2 w-full h-auto shadow-md shadow-gray-100 pl-8  flex items-center md:justify-between justify-between">
-        <a href="./index.html"><div class="logo w-auto"><img src="./images/DO IT NOW.png" alt=""></div></a>
+        <a href="./index.html">
+          <div class="logo w-auto"><img src="./images/DO IT NOW.png" alt=""></div>
+        </a>
         <div><img src="./images/menu.png" alt="" id="menu-todo"></div>
       </nav>
     </header>
@@ -26,7 +28,8 @@
           <div class="duration-dropdown w-full relative">
             <div class="duration-dropdown-toggle border-b-2 border-gray-300 w-full text-center text-xl pb-2"
               id="customDropdownViewType">Pie chart</div>
-            <ul class="duration-dropdown-menu w-full absolute z-10 shadow bg-gray-100 mt-2 hidden px-2" id="viewTypeDropOption">
+            <ul class="duration-dropdown-menu w-full absolute z-10 shadow bg-gray-100 mt-2 hidden px-2"
+              id="viewTypeDropOption">
               <li class="p-2 hover:bg-white"><a href="#">Pie chart</a></li>
               <li class="p-2 hover:bg-white"><a href="#">Bar chart</a></li>
             </ul>
@@ -35,18 +38,20 @@
         <div class="duration-prograss flex gap-x-2 w-48">
           <div class="text-xl text-blue-500">Duration: </div>
           <div class="duration-dropdown w-full relative">
-            <div class="duration-dropdown-toggle border-b-2 border-gray-300 w-full text-center text-xl pb-2" id="customDropdownDuration">Day</div>
-            <ul class="duration-dropdown-menu w-full absolute z-10 shadow bg-gray-100 mt-2 hidden px-2" id="durationDropOption">
-              <li class="p-2 hover:bg-white"><a href="#">Day</a></li>
-              <li class="p-2 hover:bg-white"><a href="#">Week</a></li>
-              <li class="p-2 hover:bg-white"><a href="#">Month</a></li>
+            <div class="duration-dropdown-toggle border-b-2 border-gray-300 w-full text-center text-xl pb-2"
+              id="customDropdownDuration">Day</div>
+            <ul class="duration-dropdown-menu w-full absolute z-10 shadow bg-gray-100 mt-2 hidden px-2"
+              id="durationDropOption" name="duration">
+              <li class="p-2 hover:bg-white" data-value="1">Day</li>
+              <li class="p-2 hover:bg-white" data-value="2">Week</li>
+              <li class="p-2 hover:bg-white" data-value="3">Month</li>
             </ul>
           </div>
         </div>
       </div>
     </main>
     <!-- charts -->
-     <div class="pt-24 w-11/12 px-2 mx-auto flex">
+    <div class="pt-24 w-11/12 px-2 mx-auto flex">
       <div class="pie-chart flex justify-around w-full items-center">
         <svg></svg>
         <div class="progress-label flex flex-col gap-y-6">
@@ -64,41 +69,31 @@
           </div>
         </div>
       </div>
-     </div>
+    </div>
     <hr />
     <div class="pt-8 pt-24 w-11/12 px-2 mx-auto flex flex-col gap-y-8">
       <h2 class="text-xl font-semibold">Task in detail</h2>
-      <div class="to-do shadow p-4 flex flex-col gap-y-4">
+      <div class="to-do shadow p-4 flex flex-col gap-y-4" id="progressToDo">
         <div class="border border-blue-400 px-8 py-2 rounded text-xl inline-flex w-32">To do</div>
-        <div class="border-b-2 pb-2 hover:bg-gray-100 p-2">Reading books</div>
-        <div class="border-b-2 pb-2 hover:bg-gray-100 p-2">Workouts</div>
-        <div class="border-b-2 pb-2 hover:bg-gray-100 p-2">Video Creation</div>
-        <div class="text-center">
+        <div class="text-center" id="toDoReference">
           <div class="text-xl text-blue-400 hover:text-blue-600 cursor-pointer">See More</div>
         </div>
       </div>
       <div class="to-do shadow p-4 flex flex-col gap-y-4">
         <div class="border border-blue-400 px-8 py-2 rounded text-xl inline-flex w-32">Doing</div>
-        <div class="border-b-2 pb-2 hover:bg-gray-100 p-2">Reading books</div>
-        <div class="border-b-2 pb-2 hover:bg-gray-100 p-2">Workouts</div>
-        <div class="border-b-2 pb-2 hover:bg-gray-100 p-2">Video Creation</div>
         <div class="text-center">
           <div class="text-xl text-blue-400 hover:text-blue-600 cursor-pointer">See More</div>
         </div>
       </div>
       <div class="to-do shadow p-4 flex flex-col gap-y-4">
         <div class="border border-blue-400 px-8 py-2 rounded text-xl inline-flex w-32">Done</div>
-        <div class="border-b-2 pb-2 hover:bg-gray-100 p-2">Reading books</div>
-        <div class="border-b-2 pb-2 hover:bg-gray-100 p-2">Workouts</div>
-        <div class="border-b-2 pb-2 hover:bg-gray-100 p-2">Video Creation</div>
         <div class="text-center">
           <div class="text-xl text-blue-400 hover:text-blue-600 cursor-pointer">See More</div>
         </div>
       </div>
     </div>
   </div>
-  <div
-    class="todoMenu bg-gray-100 inline-block p-4 rounded rounded-lg shadow-md shadow-gray-200 fixed right-10 top-10 "
+  <div class="todoMenu bg-gray-100 inline-block p-4 rounded rounded-lg shadow-md shadow-gray-200 fixed right-10 top-10 "
     id="todoMenu">
     <ul class="flex flex-col gap-y-6">
       <li class="border-b-2 pb-2 hover:text-gray-600"><a href="./yourProgress.html">Your progress</a></li>
@@ -107,7 +102,7 @@
       <li class="border-b-2 pb-2 hover:text-gray-600">Log Out</li>
     </ul>
   </div>
-  <script src="./script3.js"></script>
+  <script type="module" src="./script3.js"></script>
 </body>
 
 </html>
