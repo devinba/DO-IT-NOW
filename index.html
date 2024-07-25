@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Do It  Now</title>
+  <title>Do It Now</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
+
 <body>
   <!-- To do landing page -->
   <div class="global-container box-border h-screen relative overflow-hidden">
@@ -16,24 +18,34 @@
       </nav>
     </header>
     <main class="h-2/5 pt-24 px-4 flex flex-col items-center justify-center gap-y-24 bg-blue-">
-      <h1 class="drop-animation sm:text-7xl md:text-8xl 2xl:text-11xl text-6xl text-gray-600 text-center lg:w-3/4 xl:leading-normal 2xl:leading-relaxed">Plan with us to complete your day meaningfully</h1>
-      <button class="primary-login-btn py-4 px-9 bg-blue-400 w-46 rounded text-2xl text-slate-700 w-36 hover:bg-blue-500 hover:text-white" id="popUpSignup">Log In</button>
+      <h1
+        class="drop-animation sm:text-7xl md:text-8xl 2xl:text-11xl text-6xl text-gray-600 text-center lg:w-3/4 xl:leading-normal 2xl:leading-relaxed">
+        Plan with us to complete your day meaningfully</h1>
+      <button
+        class="primary-login-btn py-4 px-9 bg-blue-400 w-46 rounded text-2xl text-slate-700 w-36 hover:bg-blue-500 hover:text-white"
+        id="popUpSignup">Log In</button>
     </main>
     <div class="absolute bottom-0 md:max-w-full md:h-auto">
-      <img src="./images/—Pngtree—calendar time monthly calendar chart_5324170 1@3x.png" alt="" class="opacity-75 md:h-5/6 md:w-3/5">
+      <img src="./images/—Pngtree—calendar time monthly calendar chart_5324170 1@3x.png" alt=""
+        class="opacity-75 md:h-5/6 md:w-3/5">
     </div>
   </div>
   <!-- Log in or signup in pop up in the login page -->
-   <div class="signup flex justify-center flex-col  gap-y-6 border w-1/3 p-6 rounded-md shadow-xl fixed top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 z-10 bg-white sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 w-11/12 max-h-full h-auto hidden" id="loginModel">
+  <div
+    class="signup flex justify-center flex-col  gap-y-6 border w-1/3 p-6 rounded-md shadow-xl fixed top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 z-10 bg-white sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 w-11/12 max-h-full h-auto hidden"
+    id="loginModel">
     <div class="heading text-center text-3xl">Log in or Sign up</div>
     <form action="" class="flex flex-col">
       <div class="inputs flex flex-col gap-y-8">
-        <input type="text" name="emailOrMobileno" placeholder="Email or Mobile number" class="border p-4 w-full focus:outline-none text-xl">
-        <input type="text" name="password" placeholder="Password" class="border p-4 focus:outline-none text-2xl">
+        <input type="text" name="emailOrMobileno" placeholder="Email or Mobile number"
+          class="border p-4 w-full focus:outline-none text-xl" id="loginEmailMobileNo">
+        <input type="text" name="password" placeholder="Password" class="border p-4 focus:outline-none text-2xl"
+          id="signupPassword">
         <div>
 
         </div>
-        <button class="bg-blue-400 w-36 text-2xl py-2 rounded self-center hover:bg-blue-500 hover:text-white">Log In</button>
+        <button class="bg-blue-400 w-36 text-2xl py-2 rounded self-center hover:bg-blue-500 hover:text-white">Log
+          In</button>
         <a href="#" class="text-center text-2xl hover:text-gray-600" id="createAccount">Create a new account</a>
         <hr />
         <button class="flex gap-x-4 items-center justify-center bg-white p-2 shadow-md rounded-md">
@@ -42,48 +54,52 @@
         </button>
       </div>
     </form>
-   </div>
-   <!-- Sign up Model -->
-    <div
-      class="signup flex justify-center flex-col  gap-y-6 border w-1/3 p-6 rounded-md shadow-xl fixed top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 z-10 bg-white sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 w-11/12 max-h-full h-auto hidden"
-      id="signupModel">
-      <div class="heading text-center text-3xl">Sign up</div>
-      <form action="" class="flex flex-col">
-        <div class="inputs flex flex-col gap-y-8">
-          <input type="text" name="emailOrMobileno" placeholder="Mobile number"
-            class="border p-4 w-full focus:outline-none text-xl">
-            <input type="text" name="emailOrMobileno" placeholder="Email"
-              class="border p-4 w-full focus:outline-none text-xl">
-          <input type="text" name="password" placeholder="Password" class="border p-4 focus:outline-none text-2xl">
-          <div>
-    
-          </div>
-          <button class="bg-blue-400 w-36 text-2xl py-2 rounded self-center hover:bg-blue-500 hover:text-white" id="signupBtn">Sign up</button>
-          <div class="text-center text-2xl">Or</div>
-          <button class="flex gap-x-4 items-center justify-center bg-white p-2 shadow-md rounded-md">
-            <img src="./images/google.png" alt="Google Auth icon">
-            <p class="text-2xl hover:text-gray-600">Continue with Google</p>
-          </button>
-        </div>
-      </form>
-    </div>
+  </div>
+  <!-- Sign up Model -->
+  <div
+    class="signup flex justify-center flex-col  gap-y-6 border w-1/3 p-6 rounded-md shadow-xl fixed top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 z-10 bg-white sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 w-11/12 max-h-full h-auto hidden"
+    id="signupModel">
+    <div class="heading text-center text-3xl">Sign up</div>
+    <form action="" class="flex flex-col">
+      <div class="inputs flex flex-col gap-y-8">
+        <input type="text" name="emailOrMobileno" placeholder="Mobile number"
+          class="border p-4 w-full focus:outline-none text-xl">
+        <input type="text" name="emailOrMobileno" placeholder="Email"
+          class="border p-4 w-full focus:outline-none text-xl">
+        <input type="text" name="password" placeholder="Password" class="border p-4 focus:outline-none text-2xl">
+        <div>
 
-    <!-- Mobile Otp verifiction -->
-     <div class="w-11/12 sm:w-3/4 md:w-2/3 mx-auto flex flex-col gap-y-8 p-12 items-center rounded-md shadow-md fixed top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 hidden z-10 bg-white" id="otpModel">
-      <h1 class="text-2xl ">Please verify you mobile number</h1>
-      <div class="otp-input-box space-x-4">
-        <input type="text" maxlength="1" class="otp-input border w-10 h-10 focus:outline-none p-2 text-xl text-center">
-        <input type="text" maxlength="1" class="otp-input border w-10 h-10 focus:outline-none p-2 text-xl text-center">
-        <input type="text" maxlength="1" class="otp-input border w-10 h-10 focus:outline-none p-2 text-xl text-center">
-        <input type="text" maxlength="1" class="otp-input border w-10 h-10 focus:outline-none p-2 text-xl text-center">
-        <input type="text" maxlength="1" class="otp-input border w-10 h-10 focus:outline-none p-2 text-xl text-center">
-        <input type="text" maxlength="1" class="otp-input border w-10 h-10 focus:outline-none p-2 text-xl text-center">
+        </div>
+        <button class="bg-blue-400 w-36 text-2xl py-2 rounded self-center hover:bg-blue-500 hover:text-white"
+          id="signupBtn">Sign up</button>
+        <div class="text-center text-2xl">Or</div>
+        <button class="flex gap-x-4 items-center justify-center bg-white p-2 shadow-md rounded-md">
+          <img src="./images/google.png" alt="Google Auth icon">
+          <p class="text-2xl hover:text-gray-600">Continue with Google</p>
+        </button>
       </div>
-      <div id="timer-sec" class="text-gray-600"><span>15</span> sec</div>
-      <a href="#" id="resendOtp" class="text-2xl text-blue-400 hover:text-blue-600">Resend</a>
-     </div>
-   <!-- modal backdrop -->
-    <div class="fixed top-0 bottom-0 bg-gray-600 w-full h-full opacity-60 hidden" id="signupBackdrop"></div>
-  <script src="script.js"></script>
+    </form>
+  </div>
+
+  <!-- Mobile Otp verifiction -->
+  <div
+    class="w-11/12 sm:w-3/4 md:w-2/3 mx-auto flex flex-col gap-y-8 p-12 items-center rounded-md shadow-md fixed top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 hidden z-10 bg-white"
+    id="otpModel">
+    <h1 class="text-2xl ">Please verify you mobile number</h1>
+    <div class="otp-input-box space-x-4">
+      <input type="text" maxlength="1" class="otp-input border w-10 h-10 focus:outline-none p-2 text-xl text-center">
+      <input type="text" maxlength="1" class="otp-input border w-10 h-10 focus:outline-none p-2 text-xl text-center">
+      <input type="text" maxlength="1" class="otp-input border w-10 h-10 focus:outline-none p-2 text-xl text-center">
+      <input type="text" maxlength="1" class="otp-input border w-10 h-10 focus:outline-none p-2 text-xl text-center">
+      <input type="text" maxlength="1" class="otp-input border w-10 h-10 focus:outline-none p-2 text-xl text-center">
+      <input type="text" maxlength="1" class="otp-input border w-10 h-10 focus:outline-none p-2 text-xl text-center">
+    </div>
+    <div id="timer-sec" class="text-gray-600"><span>15</span> sec</div>
+    <a href="#" id="resendOtp" class="text-2xl text-blue-400 hover:text-blue-600">Resend</a>
+  </div>
+  <!-- modal backdrop -->
+  <div class="fixed top-0 bottom-0 bg-gray-600 w-full h-full opacity-60 hidden" id="signupBackdrop"></div>
+  <script type="module" src="script.js"></script>
 </body>
+
 </html>
